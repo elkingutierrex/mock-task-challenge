@@ -52,5 +52,11 @@
         {{ error }}
       </div>
     </form>
+    <ul>
+      <li>
+        Test AuthGuard, this link redirect to dashboard without login
+        <a rel="stylesheet" [routerLink]="['/dashboard']"> /dashboard </a>
+      </li>
+    </ul>
   </div>
 </div>
