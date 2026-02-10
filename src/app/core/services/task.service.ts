@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { Task } from '../../shared/models/task.model';
+import { Priority, Task } from '../../shared/models/task.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,8 @@ export class TaskService {
   }
 
 
-  private getRandomPriority(): 'low' | 'medium' | 'high' {
-    const priorities: ('low' | 'medium' | 'high')[] = ['low', 'medium', 'high'];
+  private getRandomPriority(): Priority {
+    const priorities: (Priority)[] = ['low', 'medium', 'high'];
     return priorities[Math.floor(Math.random() * priorities.length)];
   }
 
