@@ -5,16 +5,17 @@ import { AuthService } from '../services/auth.service';
 import { map, take, tap } from 'rxjs/operators';
 
 export const authGuard: CanActivateFn = (route, state) => {
-    const authService = inject(AuthService);
-    const router = inject(Router);
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-    return authService.isAuthenticated$().pipe(
-        take(1),
-        map(isAuthenticated => {
-            if (isAuthenticated) {
-                return true;
-            }
-            return router.createUrlTree(['/login']);
-        })
-    );
+  return authService.isAuthenticated$().pipe(
+    take(1),
+    map(isAuthenticated => {
+      if (isAuthenticated) {
+        return true;
+      }
+      alert('AuthGuard !!!- You must be logged in to access this page.');
+      return router.createUrlTree(['/login']);
+    })
+  );
 };
