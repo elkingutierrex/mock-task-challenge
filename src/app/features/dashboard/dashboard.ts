@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TaskService } from '../../core/services/task.service';
-import { Task } from '../../shared/models/task.model';
+import { Priority, Task } from '../../shared/models/task.model';
 import { TaskCard } from './components/task-card/task-card';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { catchError, debounceTime, map, startWith, tap } from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   error$ = new BehaviorSubject<string>('');
 
   // Filters
-  filterStatus = new FormControl<'all' | 'completed' | 'pending'>('all');
+  filterStatus = new FormControl<Priority | 'all'>('all');
   searchControl = new FormControl('');
   sortBy = new FormControl<'title' | 'date'>('date');
 
