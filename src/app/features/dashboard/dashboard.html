@@ -1,1 +1,59 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <div class="header-content">
+            <h1>My Tasks</h1>
+            <button class="btn-logout" (click)="logout()">Logout</button>
+        </div>
+
+        <div class="controls-bar">
+            <div class="search-box">
+                <input type="text" [formControl]="searchControl" placeholder="Search tasks...">
+            </div>
+
+            <div class="filters">
+                <select [formControl]="filterStatus">
+                    <option value="all">All Tasks</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                </select>
+
+                <select [formControl]="sortBy">
+                    <option value="date">Sort by Date</option>
+                    <option value="title">Sort by Title</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <div *ngIf="loading$ | async" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading tasks...</p>
+        </div>
+
+        <div *ngIf="error$ | async as error" class="error-state">
+            <p>{{ error }}</p>
+            <button (click)="loadTasks()">Retry</button>
+        </div>
+
+        <div class="task-grid" *ngIf="filteredTasks$ | async as tasks">
+            <app-task-card *ngFor="let task of tasks; trackBy: trackByTask" [task]="task"
+                (onToggle)="onToggleTask($event)" (onDelete)="onDeleteTask($event)"
+                (onEdit)="onEditTask($event)"></app-task-card>
+
+            <div class="empty-state" *ngIf="tasks.length === 0 && !(loading$ | async) && !(error$ | async)">
+                <p>No tasks found.</p>
+            </div>
+        </div>
+
+        <div class="pagination" *ngIf="totalItems > itemsPerPage">
+            <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+                Previous
+            </button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+                Next
+            </button>
+        </div>
+    </main>
+</div>

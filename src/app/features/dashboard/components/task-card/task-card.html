@@ -1,1 +1,35 @@
-<p>task-card works!</p>
+<div
+  class="task-card"
+  [ngClass]="['priority-' + (task.priority || 'low'), task.completed ? 'completed' : '']"
+>
+  <div class="task-header">
+    <div class="checkbox-wrapper">
+      <input
+        type="checkbox"
+        [checked]="task.completed"
+        (change)="onToggle.emit(task.id)"
+        [id]="'task-' + task.id"
+      />
+      <label [for]="'task-' + task.id"></label>
+    </div>
+    <h3 class="task-title" [title]="task.title">{{ task.title }}</h3>
+    <span
+      class="priority-badge"
+      [ngClass]="{
+        'priority-high': task.priority === 'high',
+        'priority-medium': task.priority === 'medium',
+        'priority-low': task.priority === 'low',
+      }"
+      >{{ task.priority }} 55</span
+    >
+  </div>
+
+  <div class="task-meta" *ngIf="task.dueDate">
+    <span class="due-date">Due: {{ task.dueDate | date: 'mediumDate' }}</span>
+  </div>
+
+  <div class="task-actions">
+    <button class="btn-edit" (click)="onEdit.emit(task)">Edit</button>
+    <button class="btn-delete" (click)="onDelete.emit(task.id)">Delete</button>
+  </div>
+</div>
