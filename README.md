@@ -1,6 +1,6 @@
 # TaskFlow Frontend - Task Management Solution
 
-This repository contains the solution for the Senior/Semi-Senior Angular Technical Challenge. It is a collaborative task management application built with **Angular 16+ = It's Build whit Angular v.21** and modern frontend practices.
+This repository contains the solution for the Senior/Semi-Senior Angular Technical Challenge. It is a collaborative task management application built with **Angular 16+ => It's Build whit Angular v.21** and modern frontend practices.
 
 ## 🚀 Project Overview
 
