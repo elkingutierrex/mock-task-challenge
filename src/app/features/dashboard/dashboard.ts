@@ -2,24 +2,22 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TaskService } from '../../core/services/task.service';
-import { AuthService } from '../../core/auth/services/auth.service';
 import { Task } from '../../shared/models/task.model';
 import { TaskCard } from './components/task-card/task-card';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { catchError, debounceTime, map, startWith, tap } from 'rxjs/operators';
+import { Paginator } from '../../shared/components/paginator/paginator';
+import { Header } from '../../shared/components/header/header';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, TaskCard],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, TaskCard, Paginator, Header],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
 export class DashboardComponent implements OnInit {
   private taskService = inject(TaskService);
-  private authService = inject(AuthService);
-  private router = inject(Router);
 
   tasks$ = new BehaviorSubject<Task[]>([]);
   loading$ = new BehaviorSubject<boolean>(true);
@@ -152,10 +150,7 @@ export class DashboardComponent implements OnInit {
     alert('MOCK - Edit functionality not implemented yet');
   }
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+
 
   trackByTask(index: number, task: Task): number {
     return task.id;

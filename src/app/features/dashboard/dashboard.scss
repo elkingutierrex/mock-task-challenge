@@ -7,34 +7,6 @@
 .dashboard-header {
     margin-bottom: 2rem;
 
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-
-        h1 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0;
-        }
-
-        .btn-logout {
-            padding: 0.5rem 1rem;
-            background-color: white;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            color: #374151;
-            font-weight: 500;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #f9fafb;
-            }
-        }
-    }
-
     .controls-bar {
         display: flex;
         flex-wrap: wrap;
@@ -99,28 +71,4 @@
     }
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-    padding: 1rem;
 
-    button {
-        padding: 0.5rem 1rem;
-        border: 1px solid #d1d5db;
-        background-color: white;
-        border-radius: 0.375rem;
-        cursor: pointer;
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        &:hover:not(:disabled) {
-            background-color: #f9fafb;
-        }
-    }
-}
